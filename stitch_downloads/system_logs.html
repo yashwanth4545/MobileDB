@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sovereign Console - Logs</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#00201b",
+                        "secondary-fixed-dim": "#ffb955",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-fixed-dim": "#00dfc6",
+                        "primary": "#71ffe8",
+                        "tertiary": "#ffe5bd",
+                        "surface-container-highest": "#353534",
+                        "primary-container": "#00e5cc",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#3b4a46",
+                        "on-tertiary-container": "#725000",
+                        "surface": "#131313",
+                        "inverse-primary": "#006b5e",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed": "#ffdea9",
+                        "on-background": "#e5e2e1",
+                        "background": "#131313",
+                        "surface-container": "#201f1f",
+                        "surface-variant": "#353534",
+                        "on-secondary-container": "#4f3100",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed-dim": "#f9bc48",
+                        "on-secondary": "#452b00",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface-variant": "#b9cac5",
+                        "on-tertiary": "#422c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-container": "#006256",
+                        "primary-fixed": "#41fce2",
+                        "on-tertiary-fixed-variant": "#5e4100",
+                        "tertiary-container": "#ffc24d",
+                        "on-secondary-fixed": "#291800",
+                        "on-primary": "#003730",
+                        "secondary": "#ffb955",
+                        "surface-tint": "#00dfc6",
+                        "on-tertiary-fixed": "#271900",
+                        "outline": "#849490",
+                        "secondary-container": "#dc9100",
+                        "surface-dim": "#131313",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "surface-bright": "#3a3939",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 20px;
+        }
+        .host-mode-border {
+            border-top: 2px solid #F5A623;
+        }
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0e0e0e;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #3b4a46;
+            border-radius: 2px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#0A0A0A] text-on-surface font-body selection:bg-primary selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-[#131313] border-b border-[#3b4a46]/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00E5CC]">terminal</span>
+<h1 class="text-[#00E5CC] font-black tracking-tighter text-lg uppercase">Sovereign Console</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 bg-secondary/10 px-3 py-1 rounded-full border border-secondary/20">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="text-secondary text-[10px] font-bold tracking-widest uppercase">Host Mode Active</span>
+</div>
+<button class="hover:bg-[#2a2a2a] transition-colors duration-150 p-2 rounded">
+<span class="material-symbols-outlined text-[#00E5CC]">settings_input_component</span>
+</button>
+</div>
+</header>
+<!-- Main Content / Host Indicator -->
+<main class="pt-14 pb-16 min-h-screen flex flex-col host-mode-border">
+<!-- Filter Bar -->
+<section class="sticky top-14 z-40 bg-[#0e0e0e] border-b border-outline-variant/10 p-4 space-y-3">
+<div class="flex gap-2 items-center">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline scale-75">search</span>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg pl-10 pr-4 py-2 text-xs font-mono tracking-tight focus:border-primary focus:ring-0 text-on-surface placeholder:text-outline/50 uppercase" placeholder="SEARCH LOGS..." type="text"/>
+</div>
+<button class="bg-surface-container-high border border-outline-variant/20 p-2 rounded-lg hover:bg-surface-container-highest transition-all">
+<span class="material-symbols-outlined text-primary">tune</span>
+</button>
+</div>
+<div class="flex gap-2 overflow-x-auto pb-1 no-scrollbar">
+<button class="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-high rounded-full border border-outline-variant/20 text-[10px] font-bold text-on-surface-variant uppercase whitespace-nowrap">
+<span>Client: ALL</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-high rounded-full border border-outline-variant/20 text-[10px] font-bold text-on-surface-variant uppercase whitespace-nowrap">
+<span>Table: users_prod</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-high rounded-full border border-outline-variant/20 text-[10px] font-bold text-on-surface-variant uppercase whitespace-nowrap">
+<span>Status: SUCCESS</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+</div>
+</section>
+<!-- Log Feed -->
+<section class="flex-1 font-mono text-[11px] leading-relaxed overflow-hidden">
+<div class="divide-y divide-outline-variant/5">
+<!-- Log Entry: Error -->
+<div class="px-4 py-3 bg-error-container/5 border-l-2 border-error hover:bg-error-container/10 transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="text-outline">[14:22:01.402]</span>
+<span class="text-error font-bold px-1.5 bg-error/10 rounded">ERROR</span>
+</div>
+<div class="grid grid-cols-[80px_1fr] gap-x-2 text-on-surface-variant">
+<span class="text-outline/60">CLIENT:</span>
+<span class="text-on-surface">192.168.1.104</span>
+<span class="text-outline/60">EXEC:</span>
+<span class="text-error">242ms</span>
+<span class="text-outline/60">QUERY:</span>
+<code class="text-error-container bg-error/5 p-1 rounded mt-1 break-all">SELECT * FROM secrets WHERE access_level &gt; 99; -- Connection Timeout</code>
+</div>
+</div>
+<!-- Log Entry: Success -->
+<div class="px-4 py-3 border-l-2 border-primary hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="text-outline">[14:21:58.112]</span>
+<span class="text-primary font-bold px-1.5 bg-primary/10 rounded">SUCCESS</span>
+</div>
+<div class="grid grid-cols-[80px_1fr] gap-x-2 text-on-surface-variant">
+<span class="text-outline/60">CLIENT:</span>
+<span class="text-on-surface">10.0.4.12</span>
+<span class="text-outline/60">EXEC:</span>
+<span class="text-primary">12ms</span>
+<span class="text-outline/60">QUERY:</span>
+<code class="text-on-surface bg-surface-container-lowest p-1 rounded mt-1 break-all">UPDATE analytics SET hits = hits + 1 WHERE route = '/api/v1/auth';</code>
+</div>
+</div>
+<!-- Log Entry: Success -->
+<div class="px-4 py-3 border-l-2 border-primary hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="text-outline">[14:21:55.004]</span>
+<span class="text-primary font-bold px-1.5 bg-primary/10 rounded">SUCCESS</span>
+</div>
+<div class="grid grid-cols-[80px_1fr] gap-x-2 text-on-surface-variant">
+<span class="text-outline/60">CLIENT:</span>
+<span class="text-on-surface">172.16.254.1</span>
+<span class="text-outline/60">EXEC:</span>
+<span class="text-primary">4ms</span>
+<span class="text-outline/60">QUERY:</span>
+<code class="text-on-surface bg-surface-container-lowest p-1 rounded mt-1 break-all">INSERT INTO system_logs (event, origin) VALUES ('DB_PING', 'MONITOR_01');</code>
+</div>
+</div>
+<!-- Log Entry: Warning -->
+<div class="px-4 py-3 border-l-2 border-secondary hover:bg-secondary/5 transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="text-outline">[14:21:42.990]</span>
+<span class="text-secondary font-bold px-1.5 bg-secondary/10 rounded">WARN</span>
+</div>
+<div class="grid grid-cols-[80px_1fr] gap-x-2 text-on-surface-variant">
+<span class="text-outline/60">CLIENT:</span>
+<span class="text-on-surface">192.168.1.104</span>
+<span class="text-outline/60">EXEC:</span>
+<span class="text-secondary">890ms</span>
+<span class="text-outline/60">QUERY:</span>
+<code class="text-on-surface bg-surface-container-lowest p-1 rounded mt-1 break-all">SELECT * FROM activity_logs ORDER BY created_at DESC LIMIT 10000; -- Slow Query Detect</code>
+</div>
+</div>
+<!-- Log Entry: Success -->
+<div class="px-4 py-3 border-l-2 border-primary hover:bg-surface-container-high transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="text-outline">[14:21:30.221]</span>
+<span class="text-primary font-bold px-1.5 bg-primary/10 rounded">SUCCESS</span>
+</div>
+<div class="grid grid-cols-[80px_1fr] gap-x-2 text-on-surface-variant">
+<span class="text-outline/60">CLIENT:</span>
+<span class="text-on-surface">127.0.0.1</span>
+<span class="text-outline/60">EXEC:</span>
+<span class="text-primary">1ms</span>
+<span class="text-outline/60">QUERY:</span>
+<code class="text-on-surface bg-surface-container-lowest p-1 rounded mt-1 break-all">PRAGMA foreign_keys = ON;</code>
+</div>
+</div>
+</div>
+<!-- Scroll Anchor -->
+<div class="flex justify-center py-6">
+<div class="flex items-center gap-2 text-outline/30 font-bold tracking-[0.2em] uppercase text-[9px]">
+<span class="animate-bounce material-symbols-outlined text-[12px]">keyboard_double_arrow_down</span>
+                    Streaming Live
+                </div>
+</div>
+</section>
+<!-- Fixed Footer Actions -->
+<div class="sticky bottom-16 px-4 py-3 bg-gradient-to-t from-[#0A0A0A] to-transparent">
+<button class="w-full bg-primary-container text-on-primary py-3 rounded-lg font-bold uppercase tracking-widest text-xs flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined text-sm">download</span>
+                Export session logs (.csv)
+            </button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-16 bg-[#0e0e0e] border-t border-[#3b4a46]/20">
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Databases</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Console</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#00E5CC] bg-[#00E5CC]/10 rounded-lg py-1 w-full" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Logs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Settings</span>
+</a>
+</nav>
+<!-- Visual Polish: Noise Texture Overlay -->
+<div class="fixed inset-0 pointer-events-none opacity-[0.03] mix-blend-overlay">
+<img class="w-full h-full object-cover" data-alt="Fine grain texture with subtle organic noise pattern for digital UI overlay" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAD0OtM_q9VatcLy8dWpPNVEAa6UA1aGTDCFtXBauZFgQl9fo4uYGYhPr4TGrPfd7n7Bb3walIxDgFhDJgQ3HYjoMKoeew93MPJTYlekDVsueWRjbgIVZI8XxVL6ezhKKRD5BB-rqik8xNQUk8Mv9QXXgoVjo8hRw-lsDLiPM7URscRiX_GyBZZ_9IXIojPFx0b3BO8TosFViFkIw_E5QdKwiNTA1DTXFdPpjPysPAQG8AzVNTJVgHEvLSiA1_ZvDYgnYgucx9pg0E"/>
+</div>
+</body></html>

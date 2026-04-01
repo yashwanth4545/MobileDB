@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sovereign Console - Host Mode</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#00201b",
+                        "secondary-fixed-dim": "#ffb955",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-fixed-dim": "#00dfc6",
+                        "primary": "#71ffe8",
+                        "tertiary": "#ffe5bd",
+                        "surface-container-highest": "#353534",
+                        "primary-container": "#00e5cc",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#3b4a46",
+                        "on-tertiary-container": "#725000",
+                        "surface": "#131313",
+                        "inverse-primary": "#006b5e",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed": "#ffdea9",
+                        "on-background": "#e5e2e1",
+                        "background": "#131313",
+                        "surface-container": "#201f1f",
+                        "surface-variant": "#353534",
+                        "on-secondary-container": "#4f3100",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed-dim": "#f9bc48",
+                        "on-secondary": "#452b00",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface-variant": "#b9cac5",
+                        "on-tertiary": "#422c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-container": "#006256",
+                        "primary-fixed": "#41fce2",
+                        "on-tertiary-fixed-variant": "#5e4100",
+                        "tertiary-container": "#ffc24d",
+                        "on-secondary-fixed": "#291800",
+                        "on-primary": "#003730",
+                        "secondary": "#ffb955",
+                        "surface-tint": "#00dfc6",
+                        "on-tertiary-fixed": "#271900",
+                        "outline": "#849490",
+                        "secondary-container": "#dc9100",
+                        "surface-dim": "#131313",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "surface-bright": "#3a3939",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            font-size: 18px;
+        }
+        body { background-color: #0A0A0A; }
+        .glass-panel {
+            background: rgba(42, 42, 42, 0.4);
+            backdrop-filter: blur(20px);
+        }
+        .host-indicator-active {
+            border-top: 2px solid #ffb955;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-surface font-body selection:bg-primary/30 host-indicator-active">
+<!-- Top Navigation Shell -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-[#131313] border-b border-[#3b4a46]/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00E5CC]">terminal</span>
+<h1 class="text-[#00E5CC] font-black tracking-tighter text-lg uppercase">Sovereign Console</h1>
+</div>
+<div class="flex items-center gap-6">
+<nav class="hidden md:flex items-center gap-4 text-sm font-bold tracking-tight uppercase">
+<a class="text-[#00E5CC] border-b-2 border-[#00E5CC] py-1" href="#">HOST</a>
+<a class="text-slate-500 hover:bg-[#2a2a2a] px-2 py-1 transition-colors" href="#">CLIENT</a>
+</nav>
+<span class="material-symbols-outlined text-[#00E5CC]">settings_input_component</span>
+</div>
+</header>
+<main class="pt-20 pb-24 px-4 max-w-7xl mx-auto space-y-6">
+<!-- Server Status Card -->
+<section class="bg-[#111111] border border-[#3b4a46]/20 rounded-lg p-5 flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-4">
+<div class="relative flex items-center justify-center">
+<span class="absolute inline-flex h-3 w-3 animate-ping rounded-full bg-primary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+</div>
+<div>
+<p class="font-mono font-bold text-primary tracking-wider text-sm">SERVER RUNNING</p>
+<p class="font-mono text-xs text-outline tracking-tighter uppercase mt-0.5">Port: <span class="text-on-surface">:8080</span></p>
+</div>
+</div>
+<div class="text-right">
+<p class="text-[10px] font-medium tracking-[0.1em] text-slate-500 uppercase mb-1">Live Uptime</p>
+<p class="font-mono text-2xl font-medium text-on-surface">02:14:33</p>
+</div>
+</section>
+<!-- Quick Stats Bento Grid -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+<div class="bg-[#111111] border border-[#3b4a46]/20 p-4 rounded-lg">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Total Queries</p>
+<p class="font-mono text-xl text-primary">124,892</p>
+</div>
+<div class="bg-[#111111] border border-[#3b4a46]/20 p-4 rounded-lg">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Active Conns</p>
+<p class="font-mono text-xl text-primary">12</p>
+</div>
+<div class="bg-[#111111] border border-[#3b4a46]/20 p-4 rounded-lg">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">DB Size (MB)</p>
+<p class="font-mono text-xl text-primary">42.8</p>
+</div>
+<div class="bg-[#111111] border border-[#3b4a46]/20 p-4 rounded-lg">
+<p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2">Queries/Min</p>
+<p class="font-mono text-xl text-primary">1,240</p>
+</div>
+</div>
+<div class="grid lg:grid-cols-12 gap-6 items-start">
+<!-- Connection Panel -->
+<section class="lg:col-span-5 bg-[#111111] border border-[#3b4a46]/20 rounded-lg overflow-hidden">
+<div class="flex border-b border-[#3b4a46]/20">
+<button class="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest text-primary border-b-2 border-primary bg-primary/5">Internet</button>
+<button class="flex-1 py-3 text-[10px] font-bold uppercase tracking-widest text-slate-500 hover:bg-surface-container-high transition-colors">Local Network</button>
+</div>
+<div class="p-6 space-y-6">
+<div class="space-y-3">
+<div class="flex items-center justify-between">
+<label class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Public Access URL</label>
+<span class="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-primary/10 text-[9px] font-bold text-primary uppercase">
+<span class="w-1 h-1 rounded-full bg-primary"></span>
+                                Tunnel Active
+                            </span>
+</div>
+<div class="bg-surface-container-lowest border border-[#3b4a46]/20 p-3 rounded-lg flex items-center justify-between group">
+<code class="font-mono text-xs text-on-surface-variant truncate mr-4">https://mobiledb-alpha-71ffe8.ngrok-free.app</code>
+<button class="text-primary hover:text-primary-fixed-dim transition-colors">
+<span class="material-symbols-outlined">content_copy</span>
+</button>
+</div>
+</div>
+<div class="relative group mx-auto w-48 h-48 bg-white p-4 rounded-xl flex items-center justify-center">
+<img alt="QR Code for remote connection" class="w-full h-full grayscale" data-alt="crisp minimalist QR code printed on white card stock with clean square pixels and professional scan markers" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaiRqDCX5f6Ezn15Tp_FTO_Zn6KMMEtt6TEQ_l0W8SexPQPA4hDq2AGNkwTgNJ0oFSNhY_6cBKEcEk2_1TQaKJOR80-r25HSbeXYNdq6l8XnIJv1Q3FqcYiIpKjDu4R_mP89EeYmU25c9v34vnXQwKlfbPsdUm9IuEoX-VUs9qANhAJwAbQ_MdlZABj7vnjFaE_VzRpJ2ZeFtVRYtnv_UUvCDhkv-ApyhAtE0237oRF-WEF2xuG_2COw8KOrNaVCtWh6opgUSH6V4"/>
+<div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+<div class="bg-white p-1 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-[#0e0e0e] text-2xl font-bold" style="font-variation-settings: 'FILL' 1;">database</span>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary font-bold py-3 rounded-lg flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">refresh</span>
+<span class="text-xs uppercase tracking-widest">Refresh Tunnel</span>
+</button>
+</div>
+</section>
+<!-- Connected Clients Panel -->
+<section class="lg:col-span-7 space-y-4">
+<div class="flex items-center justify-between px-1">
+<h2 class="text-xs font-bold uppercase tracking-widest text-slate-400">Connected Clients (4)</h2>
+<span class="text-[10px] font-mono text-slate-600">Updated: 12:44:01</span>
+</div>
+<div class="bg-[#111111] border border-[#3b4a46]/20 rounded-lg divide-y divide-[#3b4a46]/10">
+<!-- Client Row 1 -->
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center overflow-hidden border border-[#3b4a46]/20">
+<img alt="iPhone 15 Pro client icon" class="w-full h-full object-cover" data-alt="close up shot of a sleek titanium smartphone screen displaying a minimal app interface in a dark setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCiz4VNiWdw2g9-Pg2tx1Fiy7r54h9syVrLKpLmMspkbAuA8uWF74Ogc_PsUjLoncO9ZF6RkJ4ih0nc701OKt5PZ2aHUq_4Qz6h0DZFBT60C_icVZB_eX8v7Nva-UOTHL6m-_viE3j83aqlQa7lx2VXdlMlQ_3X2IfxD5to_fiubgjPgwUOCxUCimMw57svKoqRCtpdhQHFFIaBIvJNwtE1IYIYE8XvYuBqTa9dC0jD4CnT8IlptKi-Xgj2OUWq5u0Yvgpr6g-Dju8"/>
+</div>
+<div>
+<h3 class="text-sm font-bold text-on-surface">iPhone 15 Pro</h3>
+<p class="font-mono text-[10px] text-slate-500 tracking-tight">192.168.1.104 • <span class="text-primary/70">Connected 14m</span></p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors hover:bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined">search_insights</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-error transition-colors hover:bg-error/5 rounded-lg">
+<span class="material-symbols-outlined">cancel</span>
+</button>
+</div>
+</div>
+<!-- Client Row 2 -->
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center overflow-hidden border border-[#3b4a46]/20">
+<img alt="iPad Air client icon" class="w-full h-full object-cover" data-alt="minimal flat lay of a tablet device showing data visualizations on a dark professional workspace" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWVa1K-YS8s5Belwq_vCiLjbrr51w-m1cOvtaov5V6ylBdoESw-nI0q6fFIQshcalLODFDbqvhLYlxv726LCMhCalz8_EBwpGHYymvE3xJtTgRSb3m4LCIo-IFzGw9ixQrdVkkqrHNy0pvKclG8LRmh1wakZJXiV-Q9fUxXxLU_HusYYFCUkTCc4ei8okBn2XK5bGXiIT6EEbeZnet-LVsM_f3CbNpX4SCix1LnWhKo25TCxJ9SRd54h9Un3hNtTFSdYM_0dG0OeE"/>
+</div>
+<div>
+<h3 class="text-sm font-bold text-on-surface">iPad Air M2</h3>
+<p class="font-mono text-[10px] text-slate-500 tracking-tight">192.168.1.112 • <span class="text-primary/70">Connected 2h</span></p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors hover:bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined">search_insights</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-error transition-colors hover:bg-error/5 rounded-lg">
+<span class="material-symbols-outlined">cancel</span>
+</button>
+</div>
+</div>
+<!-- Client Row 3 -->
+<div class="p-4 flex items-center justify-between hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center overflow-hidden border border-[#3b4a46]/20">
+<img alt="MacBook Pro client icon" class="w-full h-full object-cover" data-alt="dramatic lighting on a premium laptop keyboard and screen displaying lines of source code in a dark room" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb22KUqYFCLIcQ5TrJ4fZmeg373tV6fCw8AIC2j9YbnUTneUDF0REkQMj3mzOqfCjj2B6KLkyaZWsCcAtQfOpLN3tuBwXXtzFqQk18Rw2ki6W47uOKA3jBWRnxvSmieQ-gpRXNQ9tYMfJV9yHsWa66yFFKPz1GzkdJIZ9AJwjXBqZlHnWU3zCeG08iNk3BmWZWDoL4Mp_WszDQeCx-oqNFE4RyM2FU7ZWAVfbqSImqkZwCXni50vT_6xXYGsFDy9Y9KHuV5cZ9wJI"/>
+</div>
+<div>
+<h3 class="text-sm font-bold text-on-surface">MacBook Pro 16</h3>
+<p class="font-mono text-[10px] text-slate-500 tracking-tight">192.168.1.101 • <span class="text-primary/70">Connected 5m</span></p>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-slate-500 hover:text-primary transition-colors hover:bg-primary/5 rounded-lg">
+<span class="material-symbols-outlined">search_insights</span>
+</button>
+<button class="p-2 text-slate-500 hover:text-error transition-colors hover:bg-error/5 rounded-lg">
+<span class="material-symbols-outlined">cancel</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-16 bg-[#0e0e0e] border-t border-[#3b4a46]/20">
+<a class="flex flex-col items-center justify-center text-[#00E5CC] bg-[#00E5CC]/10 rounded-lg py-1 w-full group" href="#">
+<span class="material-symbols-outlined mb-0.5" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full group hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined mb-0.5">database</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Databases</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full group hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined mb-0.5">terminal</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Console</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full group hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined mb-0.5">list_alt</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Logs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full group hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined mb-0.5">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Settings</span>
+</a>
+</nav>
+</body></html>

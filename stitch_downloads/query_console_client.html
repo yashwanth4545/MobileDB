@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sovereign Console - Query</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#00201b",
+                        "secondary-fixed-dim": "#ffb955",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-fixed-dim": "#00dfc6",
+                        "primary": "#71ffe8",
+                        "tertiary": "#ffe5bd",
+                        "surface-container-highest": "#353534",
+                        "primary-container": "#00e5cc",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#3b4a46",
+                        "on-tertiary-container": "#725000",
+                        "surface": "#131313",
+                        "inverse-primary": "#006b5e",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed": "#ffdea9",
+                        "on-background": "#e5e2e1",
+                        "background": "#131313",
+                        "surface-container": "#201f1f",
+                        "surface-variant": "#353534",
+                        "on-secondary-container": "#4f3100",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed-dim": "#f9bc48",
+                        "on-secondary": "#452b00",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface-variant": "#b9cac5",
+                        "on-tertiary": "#422c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-container": "#006256",
+                        "primary-fixed": "#41fce2",
+                        "on-tertiary-fixed-variant": "#5e4100",
+                        "tertiary-container": "#ffc24d",
+                        "on-secondary-fixed": "#291800",
+                        "on-primary": "#003730",
+                        "secondary": "#ffb955",
+                        "surface-tint": "#00dfc6",
+                        "on-tertiary-fixed": "#271900",
+                        "outline": "#849490",
+                        "secondary-container": "#dc9100",
+                        "surface-dim": "#131313",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "surface-bright": "#3a3939",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .syntax-keyword { color: #ffb955; }
+        .syntax-string { color: #71ffe8; }
+        .syntax-comment { color: #849490; }
+        .syntax-fn { color: #41fce2; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface-container-lowest text-on-surface font-body selection:bg-primary/30">
+<!-- TopAppBar Shell -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-[#131313] border-b border-[#3b4a46]/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00E5CC]" data-icon="terminal">terminal</span>
+<h1 class="font-['Inter'] font-bold tracking-tight text-sm uppercase text-[#00E5CC]">Sovereign Console</h1>
+</div>
+<div class="flex items-center gap-2">
+<!-- Mode Switcher -->
+<div class="flex bg-surface-container-low p-1 rounded-lg border border-outline-variant/20">
+<button class="px-3 py-1 text-[10px] font-bold uppercase rounded-md text-slate-500 hover:bg-surface-container-high transition-colors">Host</button>
+<button class="px-3 py-1 text-[10px] font-bold uppercase rounded-md bg-primary-container text-on-primary">Client</button>
+</div>
+<button class="p-2 hover:bg-[#2a2a2a] transition-colors duration-150 rounded-lg">
+<span class="material-symbols-outlined text-slate-500" data-icon="settings_input_component">settings_input_component</span>
+</button>
+</div>
+</header>
+<main class="pt-14 pb-16 min-h-screen">
+<!-- Control Bar -->
+<div class="p-4 bg-surface-container-low border-b border-outline-variant/10 flex flex-wrap gap-4 items-center justify-between">
+<div class="flex gap-2 items-center overflow-x-auto pb-1 md:pb-0">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/20 rounded-lg">
+<span class="material-symbols-outlined text-xs text-secondary" data-icon="database">database</span>
+<span class="text-xs font-mono">mobiledb_prod_01</span>
+<span class="material-symbols-outlined text-xs text-outline" data-icon="expand_more">expand_more</span>
+</div>
+<span class="text-outline">/</span>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/20 rounded-lg">
+<span class="material-symbols-outlined text-xs text-primary" data-icon="table_chart">table_chart</span>
+<span class="text-xs font-mono">user_metrics_live</span>
+<span class="material-symbols-outlined text-xs text-outline" data-icon="expand_more">expand_more</span>
+</div>
+<div class="flex items-center gap-2 ml-4">
+<div class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(113,255,232,0.6)]"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Live</span>
+</div>
+</div>
+<div class="flex gap-2 items-center">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary-container text-on-primary rounded-lg font-bold text-xs uppercase tracking-wider hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                    Run Query
+                </button>
+</div>
+</div>
+<!-- SQL Editor Workspace -->
+<div class="flex flex-col h-[353px] bg-surface-container-lowest relative overflow-hidden group">
+<div class="flex-1 flex font-mono text-sm leading-relaxed overflow-y-auto">
+<!-- Line Numbers -->
+<div class="w-12 bg-surface-container-lowest border-r border-outline-variant/10 flex flex-col items-center py-4 text-outline/40 select-none">
+<span>1</span>
+<span>2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+</div>
+<!-- Code Area -->
+<div class="flex-1 p-4 whitespace-pre outline-none selection:bg-primary/20" contenteditable="true" spellcheck="false">
+<span class="syntax-keyword">SELECT</span>
+  u.id, u.username, m.session_id, m.latency_ms
+<span class="syntax-keyword">FROM</span>
+  users u
+<span class="syntax-keyword">JOIN</span>
+  metrics m <span class="syntax-keyword">ON</span> u.id = m.user_id
+<span class="syntax-keyword">WHERE</span>
+  m.status = <span class="syntax-string">'active'</span> <span class="syntax-keyword">AND</span> m.latency_ms &gt; <span class="syntax-fn">150</span>
+<span class="syntax-keyword">ORDER BY</span>
+  m.timestamp <span class="syntax-keyword">DESC</span>;</div>
+</div>
+<!-- Editor Toolbar -->
+<div class="absolute bottom-2 right-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+<button class="p-1.5 bg-surface-container-high rounded border border-outline-variant/20 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="content_copy">content_copy</span>
+</button>
+<button class="p-1.5 bg-surface-container-high rounded border border-outline-variant/20 text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="format_align_left">format_align_left</span>
+</button>
+</div>
+</div>
+<!-- Results Section Container -->
+<div class="flex flex-col bg-surface border-t border-outline-variant/20">
+<!-- Results Header -->
+<div class="flex items-center justify-between px-4 h-12 bg-surface-container-low border-b border-outline-variant/10">
+<div class="flex gap-4 items-center">
+<button class="text-xs font-bold uppercase tracking-widest text-primary border-b border-primary h-12 px-1">Table View</button>
+<button class="text-xs font-bold uppercase tracking-widest text-slate-500 hover:text-on-surface h-12 px-1 transition-colors">JSON View</button>
+</div>
+<div class="flex items-center gap-4 text-[10px] font-mono text-outline uppercase tracking-wider">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[12px]" data-icon="timer">timer</span>
+                        14ms
+                    </div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[12px]" data-icon="layers">layers</span>
+                        128 Rows
+                    </div>
+</div>
+</div>
+<!-- Table Workspace -->
+<div class="overflow-x-auto">
+<table class="w-full border-collapse font-mono text-xs text-left">
+<thead>
+<tr class="bg-surface-container-high text-outline uppercase tracking-tighter">
+<th class="px-4 py-3 font-semibold border-r border-outline-variant/5">ID</th>
+<th class="px-4 py-3 font-semibold border-r border-outline-variant/5">Username</th>
+<th class="px-4 py-3 font-semibold border-r border-outline-variant/5">Session_ID</th>
+<th class="px-4 py-3 font-semibold">Latency_MS</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-4 py-3 border-r border-outline-variant/5 text-secondary">uuid-8821-xk</td>
+<td class="px-4 py-3 border-r border-outline-variant/5">delta_vanguard</td>
+<td class="px-4 py-3 border-r border-outline-variant/5 text-outline">sess_9921_aa</td>
+<td class="px-4 py-3 font-medium text-error">182ms</td>
+</tr>
+<tr class="bg-surface-container-lowest/40 hover:bg-primary/5 transition-colors">
+<td class="px-4 py-3 border-r border-outline-variant/5 text-secondary">uuid-8822-xm</td>
+<td class="px-4 py-3 border-r border-outline-variant/5">cyber_ghost</td>
+<td class="px-4 py-3 border-r border-outline-variant/5 text-outline">sess_9923_bb</td>
+<td class="px-4 py-3 font-medium text-error">210ms</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-4 py-3 border-r border-outline-variant/5 text-secondary">uuid-8825-xq</td>
+<td class="px-4 py-3 border-r border-outline-variant/5">null_pointer</td>
+<td class="px-4 py-3 border-r border-outline-variant/5 text-outline">sess_9924_cc</td>
+<td class="px-4 py-3 font-medium text-primary">151ms</td>
+</tr>
+<tr class="bg-surface-container-lowest/40 hover:bg-primary/5 transition-colors">
+<td class="px-4 py-3 border-r border-outline-variant/5 text-secondary">uuid-8829-zz</td>
+<td class="px-4 py-3 border-r border-outline-variant/5">root_access</td>
+<td class="px-4 py-3 border-r border-outline-variant/5 text-outline">sess_9928_ee</td>
+<td class="px-4 py-3 font-medium text-error">340ms</td>
+</tr>
+<tr class="hover:bg-primary/5 transition-colors">
+<td class="px-4 py-3 border-r border-outline-variant/5 text-secondary">uuid-8831-pq</td>
+<td class="px-4 py-3 border-r border-outline-variant/5">quantum_user</td>
+<td class="px-4 py-3 border-r border-outline-variant/5 text-outline">sess_9930_ff</td>
+<td class="px-4 py-3 font-medium text-error">155ms</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- BottomNavBar Shell -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-16 bg-[#0e0e0e] border-t border-[#3b4a46]/20">
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Databases</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#00E5CC] bg-[#00E5CC]/10 rounded-lg py-1 w-full scale-90 duration-75" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Console</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Logs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Settings</span>
+</a>
+</nav>
+</body></html>

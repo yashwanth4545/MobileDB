@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary-fixed": "#00201b",
+                        "secondary-fixed-dim": "#ffb955",
+                        "inverse-surface": "#e5e2e1",
+                        "primary-fixed-dim": "#00dfc6",
+                        "primary": "#71ffe8",
+                        "tertiary": "#ffe5bd",
+                        "surface-container-highest": "#353534",
+                        "primary-container": "#00e5cc",
+                        "error": "#ffb4ab",
+                        "outline-variant": "#3b4a46",
+                        "on-tertiary-container": "#725000",
+                        "surface": "#131313",
+                        "inverse-primary": "#006b5e",
+                        "secondary-fixed": "#ffddb4",
+                        "inverse-on-surface": "#313030",
+                        "tertiary-fixed": "#ffdea9",
+                        "on-background": "#e5e2e1",
+                        "background": "#131313",
+                        "surface-container": "#201f1f",
+                        "surface-variant": "#353534",
+                        "on-secondary-container": "#4f3100",
+                        "surface-container-low": "#1c1b1b",
+                        "tertiary-fixed-dim": "#f9bc48",
+                        "on-secondary": "#452b00",
+                        "on-error": "#690005",
+                        "error-container": "#93000a",
+                        "surface-container-high": "#2a2a2a",
+                        "on-surface-variant": "#b9cac5",
+                        "on-tertiary": "#422c00",
+                        "surface-container-lowest": "#0e0e0e",
+                        "on-primary-container": "#006256",
+                        "primary-fixed": "#41fce2",
+                        "on-tertiary-fixed-variant": "#5e4100",
+                        "tertiary-container": "#ffc24d",
+                        "on-secondary-fixed": "#291800",
+                        "on-primary": "#003730",
+                        "secondary": "#ffb955",
+                        "surface-tint": "#00dfc6",
+                        "on-tertiary-fixed": "#271900",
+                        "outline": "#849490",
+                        "secondary-container": "#dc9100",
+                        "surface-dim": "#131313",
+                        "on-secondary-fixed-variant": "#633f00",
+                        "surface-bright": "#3a3939",
+                        "on-primary-fixed-variant": "#005047",
+                        "on-surface": "#e5e2e1",
+                        "on-error-container": "#ffdad6"
+                    },
+                    fontFamily: {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"],
+                        "mono": ["JetBrains Mono"]
+                    },
+                    borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #0A0A0A;
+            color: #e5e2e1;
+            font-family: 'Inter', sans-serif;
+        }
+        .qr-overlay {
+            background: linear-gradient(to bottom, transparent, transparent),
+                        linear-gradient(to right, #00E5CC 2px, transparent 2px) 0 0,
+                        linear-gradient(to bottom, #00E5CC 2px, transparent 2px) 0 0,
+                        linear-gradient(to left, #00E5CC 2px, transparent 2px) 100% 0,
+                        linear-gradient(to bottom, #00E5CC 2px, transparent 2px) 100% 0,
+                        linear-gradient(to right, #00E5CC 2px, transparent 2px) 0 100%,
+                        linear-gradient(to top, #00E5CC 2px, transparent 2px) 0 100%,
+                        linear-gradient(to left, #00E5CC 2px, transparent 2px) 100% 100%,
+                        linear-gradient(to top, #00E5CC 2px, transparent 2px) 100% 100%;
+            background-repeat: no-repeat;
+            background-size: 40px 40px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-[#131313] dark:bg-[#131313] border-b border-[#3b4a46]/20">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00E5CC]" data-icon="terminal">terminal</span>
+<span class="font-['Inter'] font-black tracking-tighter text-lg text-[#00E5CC]">Sovereign Console</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex bg-surface-container-lowest rounded-lg p-1 border border-outline-variant/20">
+<button class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider rounded bg-primary-container text-on-primary">Client</button>
+<button class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500 hover:text-on-surface transition-colors">Host</button>
+</div>
+<span class="material-symbols-outlined text-slate-500 hover:bg-[#2a2a2a] p-1 rounded transition-colors" data-icon="settings_input_component">settings_input_component</span>
+</div>
+</header>
+<main class="flex-1 pt-16 pb-20 px-4 max-w-2xl mx-auto w-full">
+<!-- Connection Status Card (Active Connecting State) -->
+<section class="mb-6">
+<div class="bg-surface-container-low border border-outline-variant/20 rounded-xl p-4 flex items-center gap-4 relative overflow-hidden">
+<div class="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center relative">
+<span class="material-symbols-outlined text-primary" data-icon="sync" style="font-variation-settings: 'FILL' 0;">sync</span>
+<!-- Spinner Effect via SVG or CSS would go here, using glow instead for precision -->
+<div class="absolute inset-0 border-2 border-primary/30 rounded-lg animate-pulse"></div>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h2 class="text-sm font-bold uppercase tracking-widest text-primary">Establishing Link</h2>
+<span class="font-mono text-[10px] text-slate-500">PING: --ms</span>
+</div>
+<p class="text-xs text-on-surface-variant font-mono mt-1">HANDSHAKE: mobiledb://prod-cluster-01.local</p>
+</div>
+</div>
+</section>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- QR Scanner Section -->
+<section class="flex flex-col gap-3">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold uppercase tracking-[0.1em] text-slate-500">Visual Auth</span>
+<span class="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded">Auto-Detect ON</span>
+</div>
+<div class="relative aspect-square w-full bg-surface-container-lowest rounded-xl border border-outline-variant/20 overflow-hidden group">
+<!-- Placeholder for Camera Viewport -->
+<div class="absolute inset-0 bg-slate-900 flex items-center justify-center">
+<img alt="Abstract high-tech digital grid with cyan and dark grey tones, representing a camera sensor view" class="w-full h-full object-cover opacity-40 mix-blend-overlay" data-alt="Dark futuristic digital interface with scanning lines and cyan glowing circuit patterns for a technical scanner background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCe6Lm9X0m4qSoeACTEiYlKq925mGHKmnjAecs3JlveZu3v5-DBEUCILnUnv4-YA24CjXI9OiQVw5ng_RSO9s2W2eu4tDZhZuA4UAefjEMde307RajFS4PJlLgOvO0faIYjEU2HSzImwT9_a6TYJnGEnXQkZ35sCFW45HnhpUaf_v1bT9WQiTNNWi9Y08fULTzlhTaEFjvcKomFakcpeOmAlY32FpFDoMJ4wp3AJEeiKkfGVSajbc2QZA7CqjjHKDVr5hcf0tPLi1U"/>
+<span class="material-symbols-outlined text-slate-700 text-6xl" data-icon="photo_camera">photo_camera</span>
+</div>
+<!-- Frame Overlay -->
+<div class="absolute inset-0 m-12 qr-overlay pointer-events-none"></div>
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<div class="w-48 h-48 border border-primary/20 bg-primary/5 rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-primary/40 text-4xl" data-icon="qr_code_scanner">qr_code_scanner</span>
+</div>
+</div>
+<!-- Technical Readout -->
+<div class="absolute bottom-4 left-4 right-4 flex justify-between">
+<span class="text-[8px] font-mono text-primary/60">SCAN_ENGINE: v4.2.0</span>
+<span class="text-[8px] font-mono text-primary/60">ISO: 800</span>
+</div>
+</div>
+</section>
+<!-- Manual Entry Section -->
+<section class="flex flex-col gap-3">
+<span class="text-[10px] font-bold uppercase tracking-[0.1em] text-slate-500">Manual Configuration</span>
+<div class="space-y-4">
+<div class="group">
+<label class="block text-[10px] font-semibold text-slate-400 mb-1.5 uppercase tracking-tighter">Connection URL / IP</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl px-4 py-3 text-sm font-mono text-primary placeholder-slate-700 focus:outline-none focus:border-primary transition-all" placeholder="mobiledb://192.168.1.100:5432" type="text"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-600 text-sm" data-icon="lan">lan</span>
+</div>
+</div>
+<div class="group">
+<label class="block text-[10px] font-semibold text-slate-400 mb-1.5 uppercase tracking-tighter">Auth Password</label>
+<div class="relative">
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-xl px-4 py-3 text-sm font-mono text-primary placeholder-slate-700 focus:outline-none focus:border-primary transition-all" placeholder="••••••••••••" type="password"/>
+<span class="absolute right-4 top-1/2 -translate-y-1/2 material-symbols-outlined text-slate-600 text-sm" data-icon="key">key</span>
+</div>
+</div>
+<button class="w-full bg-primary-container text-on-primary font-bold py-4 rounded-xl text-xs uppercase tracking-widest hover:opacity-90 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
+                        Initialize Connection
+                        <span class="material-symbols-outlined text-sm" data-icon="bolt" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Recent Connections -->
+<section class="mt-10">
+<div class="flex items-center justify-between mb-4">
+<span class="text-[10px] font-bold uppercase tracking-[0.1em] text-slate-500">Registry History</span>
+<button class="text-[10px] text-slate-500 hover:text-on-surface">Clear Cache</button>
+</div>
+<div class="flex flex-col gap-2">
+<!-- Entry 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low hover:bg-surface-container-high rounded-xl cursor-pointer transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-lg" data-icon="database">database</span>
+</div>
+<div>
+<h3 class="text-sm font-bold tracking-tight">Main Production Cluster</h3>
+<p class="font-mono text-[10px] text-slate-500">db-prod.mobile-internal.sh:8080</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-mono text-primary">24ms</span>
+<span class="material-symbols-outlined text-slate-600 text-lg" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Entry 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low hover:bg-surface-container-high rounded-xl cursor-pointer transition-colors border border-transparent hover:border-outline-variant/30">
+<div class="flex items-center gap-4">
+<div class="w-8 h-8 rounded bg-surface-container-highest flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-lg" data-icon="terminal">terminal</span>
+</div>
+<div>
+<h3 class="text-sm font-bold tracking-tight">Local Staging</h3>
+<p class="font-mono text-[10px] text-slate-500">127.0.0.1:9090</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-mono text-slate-500">OFFLINE</span>
+<span class="material-symbols-outlined text-slate-600 text-lg" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Connected Server Info (Shown after successful link) -->
+<section class="mt-8">
+<div class="bg-[#00E5CC]/5 border border-[#00E5CC]/20 rounded-xl p-5 border-dashed">
+<div class="flex items-center gap-2 mb-4">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(113,255,232,0.6)]"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-primary">Active Endpoint Data</span>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1">
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Server Identity</span>
+<p class="text-xs font-bold text-on-surface truncate">SOVEREIGN-US-WEST-01</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Database Name</span>
+<p class="text-xs font-bold text-on-surface truncate">users_v4_sharded</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Latency</span>
+<p class="text-xs font-mono font-bold text-primary">12.4ms (STABLE)</p>
+</div>
+<div class="space-y-1">
+<span class="text-[10px] text-slate-500 uppercase tracking-tighter">Uptime</span>
+<p class="text-xs font-mono font-bold text-on-surface">14d 02h 11m</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-16 bg-[#0e0e0e] dark:bg-[#0e0e0e] border-t border-[#3b4a46]/20">
+<div class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Dashboard</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Databases</span>
+</div>
+<div class="flex flex-col items-center justify-center text-[#00E5CC] bg-[#00E5CC]/10 rounded-lg py-1 w-full">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Console</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Logs</span>
+</div>
+<div class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase">Settings</span>
+</div>
+</nav>
+</body></html>

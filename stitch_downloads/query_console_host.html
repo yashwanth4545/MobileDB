@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sovereign Console | MobileDB</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary-fixed": "#00201b",
+            "secondary-fixed-dim": "#ffb955",
+            "inverse-surface": "#e5e2e1",
+            "primary-fixed-dim": "#00dfc6",
+            "primary": "#71ffe8",
+            "tertiary": "#ffe5bd",
+            "surface-container-highest": "#353534",
+            "primary-container": "#00e5cc",
+            "error": "#ffb4ab",
+            "outline-variant": "#3b4a46",
+            "on-tertiary-container": "#725000",
+            "surface": "#131313",
+            "inverse-primary": "#006b5e",
+            "secondary-fixed": "#ffddb4",
+            "inverse-on-surface": "#313030",
+            "tertiary-fixed": "#ffdea9",
+            "on-background": "#e5e2e1",
+            "background": "#131313",
+            "surface-container": "#201f1f",
+            "surface-variant": "#353534",
+            "on-secondary-container": "#4f3100",
+            "surface-container-low": "#1c1b1b",
+            "tertiary-fixed-dim": "#f9bc48",
+            "on-secondary": "#452b00",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "surface-container-high": "#2a2a2a",
+            "on-surface-variant": "#b9cac5",
+            "on-tertiary": "#422c00",
+            "surface-container-lowest": "#0e0e0e",
+            "on-primary-container": "#006256",
+            "primary-fixed": "#41fce2",
+            "on-tertiary-fixed-variant": "#5e4100",
+            "tertiary-container": "#ffc24d",
+            "on-secondary-fixed": "#291800",
+            "on-primary": "#003730",
+            "secondary": "#ffb955",
+            "surface-tint": "#00dfc6",
+            "on-tertiary-fixed": "#271900",
+            "outline": "#849490",
+            "secondary-container": "#dc9100",
+            "surface-dim": "#131313",
+            "on-secondary-fixed-variant": "#633f00",
+            "surface-bright": "#3a3939",
+            "on-primary-fixed-variant": "#005047",
+            "on-surface": "#e5e2e1",
+            "on-error-container": "#ffdad6"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"],
+            "mono": ["JetBrains Mono"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+      text-transform: none;
+      letter-spacing: normal;
+      word-wrap: normal;
+      white-space: nowrap;
+      direction: ltr;
+    }
+    .host-mode-indicator {
+      border-top: 2px solid #ffb955;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #0e0e0e;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #3b4a46;
+      border-radius: 2px;
+    }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-[#0A0A0A] text-on-surface font-body overflow-hidden h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-[#131313] dark:bg-[#131313] border-b border-[#3b4a46]/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00E5CC]" data-icon="terminal">terminal</span>
+<h1 class="font-['Inter'] font-black tracking-tighter text-lg text-[#00E5CC]">Sovereign Console</h1>
+<span class="ml-4 px-2 py-0.5 rounded text-[10px] font-bold bg-secondary/10 text-secondary border border-secondary/20 tracking-widest uppercase">Host Mode Active</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:flex gap-6 items-center">
+<a class="font-['Inter'] font-bold tracking-tight text-sm uppercase text-slate-500 hover:bg-[#2a2a2a] transition-colors duration-150 px-2 py-1 rounded" href="#">Dashboard</a>
+<a class="font-['Inter'] font-bold tracking-tight text-sm uppercase text-slate-500 hover:bg-[#2a2a2a] transition-colors duration-150 px-2 py-1 rounded" href="#">Databases</a>
+<a class="font-['Inter'] font-bold tracking-tight text-sm uppercase text-[#00E5CC] border-b-2 border-[#00E5CC] px-2 py-1" href="#">Console</a>
+</div>
+<button class="material-symbols-outlined text-[#00E5CC] hover:bg-[#2a2a2a] p-2 rounded transition-colors" data-icon="settings_input_component">settings_input_component</button>
+</div>
+</header>
+<!-- Main Content Layout -->
+<main class="flex-1 mt-14 mb-16 flex flex-col md:flex-row overflow-hidden host-mode-indicator">
+<!-- Sidebar: Query History -->
+<aside class="hidden md:flex w-72 flex-col bg-surface-container-lowest border-r border-outline-variant/10 overflow-hidden">
+<div class="p-4 flex items-center justify-between">
+<span class="text-label-sm font-bold tracking-[0.05em] uppercase text-outline">Query History</span>
+<span class="material-symbols-outlined text-outline text-sm" data-icon="history">history</span>
+</div>
+<div class="flex-1 overflow-y-auto custom-scrollbar px-2 space-y-1">
+<!-- History Items -->
+<button class="w-full text-left p-3 rounded-lg bg-surface-container-high/40 hover:bg-surface-container-high transition-all group">
+<div class="text-mono text-[11px] text-primary truncate mb-1">SELECT * FROM mobile_assets...</div>
+<div class="text-[9px] text-outline font-mono flex justify-between items-center">
+<span>2m ago</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity">RESTORE</span>
+</div>
+</button>
+<button class="w-full text-left p-3 rounded-lg hover:bg-surface-container-high/40 transition-all group">
+<div class="text-mono text-[11px] text-on-surface-variant truncate mb-1">UPDATE deployment_status...</div>
+<div class="text-[9px] text-outline font-mono flex justify-between items-center">
+<span>14m ago</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity">RESTORE</span>
+</div>
+</button>
+<button class="w-full text-left p-3 rounded-lg hover:bg-surface-container-high/40 transition-all group">
+<div class="text-mono text-[11px] text-on-surface-variant truncate mb-1">INSERT INTO audit_logs (id...</div>
+<div class="text-[9px] text-outline font-mono flex justify-between items-center">
+<span>1h ago</span>
+<span class="opacity-0 group-hover:opacity-100 transition-opacity">RESTORE</span>
+</div>
+</button>
+<button class="w-full text-left p-3 rounded-lg hover:bg-surface-container-high/40 transition-all group border-l-2 border-error/50 bg-error/5">
+<div class="text-mono text-[11px] text-error/80 truncate mb-1">SELECT * FROM no_table_here...</div>
+<div class="text-[9px] text-error/60 font-mono flex justify-between items-center">
+<span>3h ago</span>
+<span class="text-error">FAILED</span>
+</div>
+</button>
+<!-- Repeated items to fill space -->
+<div class="w-full text-left p-3 rounded-lg hover:bg-surface-container-high/40 transition-all text-mono text-[11px] text-on-surface-variant truncate">SELECT user_id, session_token FROM sessions...</div>
+<div class="w-full text-left p-3 rounded-lg hover:bg-surface-container-high/40 transition-all text-mono text-[11px] text-on-surface-variant truncate">PRAGMA table_info('inventory')...</div>
+</div>
+</aside>
+<!-- Editor & Results Canvas -->
+<div class="flex-1 flex flex-col overflow-hidden bg-[#0A0A0A]">
+<!-- Editor Section -->
+<div class="flex-1 flex flex-col min-h-[300px]">
+<div class="bg-surface-container-low px-4 py-2 border-b border-outline-variant/10 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="text-[11px] font-mono text-outline uppercase tracking-wider">MobileDB: main.sqlite</span>
+<span class="h-3 w-[1px] bg-outline-variant/30"></span>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-[10px] text-primary font-bold">CONNECTED</span>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="text-outline hover:text-on-surface p-1"><span class="material-symbols-outlined text-lg" data-icon="cleaning_services">cleaning_services</span></button>
+<button class="text-outline hover:text-on-surface p-1"><span class="material-symbols-outlined text-lg" data-icon="save">save</span></button>
+</div>
+</div>
+<!-- Code Editor Surface -->
+<div class="flex-1 flex bg-[#0e0e0e] font-mono text-sm leading-relaxed relative overflow-hidden">
+<!-- Line Numbers -->
+<div class="w-12 bg-[#0e0e0e] text-outline/30 flex flex-col items-end pr-3 pt-4 select-none border-r border-outline-variant/5">
+<span>1</span>
+<span class="text-error/80 bg-error/10 w-full text-right pr-3">2</span>
+<span>3</span>
+<span>4</span>
+<span>5</span>
+<span>6</span>
+</div>
+<!-- Text Area -->
+<div class="flex-1 p-4 overflow-auto custom-scrollbar">
+<div class="whitespace-pre"><span class="text-secondary">SELECT</span> * <span class="text-secondary">FROM</span> mobile_assets</div>
+<div class="whitespace-pre bg-error/10 w-full"><span class="text-secondary">WHERE</span> cluster_id = <span class="text-primary-fixed-dim">'X-901'</span></div>
+<div class="whitespace-pre"><span class="text-secondary">ORDER BY</span> created_at <span class="text-secondary">DESC</span>;</div>
+<div class="mt-8 border-l-2 border-primary/20 pl-4 py-1 text-outline/40">
+              -- Press Ctrl+Enter to execute buffer
+            </div>
+<!-- Error Underline Mock -->
+<div class="absolute top-[2.75rem] left-[13rem] h-[2px] w-24 bg-error shadow-[0_0_10px_rgba(255,180,171,0.5)]"></div>
+</div>
+</div>
+<!-- Error Banner -->
+<div class="bg-error-container/20 border-y border-error/20 px-4 py-3 flex items-start gap-3">
+<span class="material-symbols-outlined text-error mt-0.5" data-icon="error">error</span>
+<div class="flex-1">
+<div class="text-error font-bold text-[12px] uppercase tracking-tight">Execution Error</div>
+<p class="text-on-error-container font-mono text-[13px] mt-1">Error: no such column: cluster_id (line 2)</p>
+</div>
+<button class="text-error hover:bg-error/10 rounded p-1"><span class="material-symbols-outlined" data-icon="close">close</span></button>
+</div>
+<!-- Editor Toolbar -->
+<div class="p-3 bg-surface-container-low flex justify-between items-center border-t border-outline-variant/10">
+<div class="flex gap-2">
+<span class="flex items-center gap-1.5 px-3 py-1 bg-surface-container-highest rounded text-[11px] font-mono text-on-surface-variant">
+<span class="material-symbols-outlined text-sm" data-icon="timer">timer</span> 12ms
+            </span>
+</div>
+<button class="bg-primary-container text-on-primary font-bold text-xs px-6 py-2 rounded-lg flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary/10">
+<span class="material-symbols-outlined text-lg" data-icon="play_arrow" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+            Run (Ctrl+Enter)
+          </button>
+</div>
+</div>
+<!-- Results Section -->
+<div class="h-[300px] flex flex-col bg-surface-container-lowest border-t border-outline-variant/20">
+<div class="px-4 py-2 flex items-center justify-between border-b border-outline-variant/5">
+<div class="flex items-center gap-3">
+<span class="text-label-sm font-bold text-outline">RESULTS</span>
+<span class="px-2 py-0.5 rounded bg-[#00E5CC]/10 text-[#00E5CC] text-[10px] font-mono border border-[#00E5CC]/20">52 ROWS</span>
+</div>
+<div class="flex gap-2">
+<button class="text-[10px] font-bold text-outline hover:text-on-surface border border-outline-variant/20 px-2 py-1 rounded">CSV</button>
+<button class="text-[10px] font-bold text-outline hover:text-on-surface border border-outline-variant/20 px-2 py-1 rounded">JSON</button>
+</div>
+</div>
+<div class="flex-1 overflow-auto custom-scrollbar">
+<table class="w-full border-collapse font-mono text-[12px] text-left">
+<thead class="sticky top-0 bg-[#0e0e0e] z-10">
+<tr class="text-outline uppercase text-[10px] tracking-widest border-b border-outline-variant/10">
+<th class="p-3 font-medium">ID</th>
+<th class="p-3 font-medium">ASSET_NAME</th>
+<th class="p-3 font-medium">STATUS</th>
+<th class="p-3 font-medium">IP_ADDR</th>
+<th class="p-3 font-medium">LAST_PING</th>
+</tr>
+</thead>
+<tbody>
+<tr class="bg-[#111] hover:bg-[#1a1a1a] border-b border-outline-variant/5">
+<td class="p-3 text-primary-fixed-dim">MD-8821</td>
+<td class="p-3">Core_Node_Alpha</td>
+<td class="p-3"><span class="text-primary">ONLINE</span></td>
+<td class="p-3">192.168.1.44</td>
+<td class="p-3 text-outline">2023-10-24 14:02:11</td>
+</tr>
+<tr class="bg-[#141414] hover:bg-[#1a1a1a] border-b border-outline-variant/5">
+<td class="p-3 text-primary-fixed-dim">MD-8822</td>
+<td class="p-3">Core_Node_Beta</td>
+<td class="p-3"><span class="text-primary">ONLINE</span></td>
+<td class="p-3">192.168.1.45</td>
+<td class="p-3 text-outline">2023-10-24 14:02:09</td>
+</tr>
+<tr class="bg-[#111] hover:bg-[#1a1a1a] border-b border-outline-variant/5">
+<td class="p-3 text-primary-fixed-dim">MD-8823</td>
+<td class="p-3">Relay_Primary</td>
+<td class="p-3"><span class="text-secondary">MAINTENANCE</span></td>
+<td class="p-3">192.168.2.1</td>
+<td class="p-3 text-outline">2023-10-24 13:44:52</td>
+</tr>
+<tr class="bg-[#141414] hover:bg-[#1a1a1a] border-b border-outline-variant/5">
+<td class="p-3 text-primary-fixed-dim">MD-8824</td>
+<td class="p-3">Relay_Secondary</td>
+<td class="p-3"><span class="text-primary">ONLINE</span></td>
+<td class="p-3">192.168.2.2</td>
+<td class="p-3 text-outline">2023-10-24 14:02:10</td>
+</tr>
+<tr class="bg-[#111] hover:bg-[#1a1a1a] border-b border-outline-variant/5">
+<td class="p-3 text-primary-fixed-dim">MD-8825</td>
+<td class="p-3">Worker_01</td>
+<td class="p-3 text-error">OFFLINE</td>
+<td class="p-3">192.168.5.11</td>
+<td class="p-3 text-outline">2023-10-21 09:12:33</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-16 bg-[#0e0e0e] dark:bg-[#0e0e0e] border-t border-[#3b4a46]/20">
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Databases</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#00E5CC] bg-[#00E5CC]/10 rounded-lg py-1 w-full" href="#">
+<span class="material-symbols-outlined" data-icon="terminal" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Console</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Logs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Settings</span>
+</a>
+</nav>
+</body></html>

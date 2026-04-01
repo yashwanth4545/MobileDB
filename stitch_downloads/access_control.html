@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-primary-fixed": "#00201b",
+            "secondary-fixed-dim": "#ffb955",
+            "inverse-surface": "#e5e2e1",
+            "primary-fixed-dim": "#00dfc6",
+            "primary": "#71ffe8",
+            "tertiary": "#ffe5bd",
+            "surface-container-highest": "#353534",
+            "primary-container": "#00e5cc",
+            "error": "#ffb4ab",
+            "outline-variant": "#3b4a46",
+            "on-tertiary-container": "#725000",
+            "surface": "#131313",
+            "inverse-primary": "#006b5e",
+            "secondary-fixed": "#ffddb4",
+            "inverse-on-surface": "#313030",
+            "tertiary-fixed": "#ffdea9",
+            "on-background": "#e5e2e1",
+            "background": "#0e0e0e",
+            "surface-container": "#201f1f",
+            "surface-variant": "#353534",
+            "on-secondary-container": "#4f3100",
+            "surface-container-low": "#1c1b1b",
+            "tertiary-fixed-dim": "#f9bc48",
+            "on-secondary": "#452b00",
+            "on-error": "#690005",
+            "error-container": "#93000a",
+            "surface-container-high": "#2a2a2a",
+            "on-surface-variant": "#b9cac5",
+            "on-tertiary": "#422c00",
+            "surface-container-lowest": "#0e0e0e",
+            "on-primary-container": "#006256",
+            "primary-fixed": "#41fce2",
+            "on-tertiary-fixed-variant": "#5e4100",
+            "tertiary-container": "#ffc24d",
+            "on-secondary-fixed": "#291800",
+            "on-primary": "#003730",
+            "secondary": "#ffb955",
+            "surface-tint": "#00dfc6",
+            "on-tertiary-fixed": "#271900",
+            "outline": "#849490",
+            "secondary-container": "#dc9100",
+            "surface-dim": "#131313",
+            "on-secondary-fixed-variant": "#633f00",
+            "surface-bright": "#3a3939",
+            "on-primary-fixed-variant": "#005047",
+            "on-surface": "#e5e2e1",
+            "on-error-container": "#ffdad6"
+          },
+          fontFamily: {
+            "headline": ["Inter"],
+            "body": ["Inter"],
+            "label": ["Inter"],
+            "mono": ["JetBrains Mono"]
+          },
+          borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+      background-color: #0A0A0A;
+      color: #e5e2e1;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+  </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary-container selection:text-on-primary-container">
+<!-- Host Indicator (Specified in Design System) -->
+<div class="fixed top-0 left-0 w-full h-[2px] bg-secondary z-[60] shadow-[0_0_10px_rgba(245,166,35,0.5)]"></div>
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-4 h-14 bg-[#131313] border-b border-[#3b4a46]/20">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#00E5CC]" data-icon="terminal">terminal</span>
+<h1 class="font-['Inter'] font-black tracking-tighter text-lg text-[#00E5CC]">Sovereign Console</h1>
+</div>
+<div class="flex items-center gap-2">
+<div class="flex bg-surface-container-lowest p-1 rounded-lg border border-outline-variant/20">
+<button class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider bg-secondary text-on-secondary rounded">Host</button>
+<button class="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-slate-500 hover:text-on-surface transition-colors">Client</button>
+</div>
+<button class="p-2 rounded hover:bg-[#2a2a2a] transition-colors duration-150">
+<span class="material-symbols-outlined text-slate-400" data-icon="settings_input_component">settings_input_component</span>
+</button>
+</div>
+</header>
+<main class="pt-20 pb-24 px-4 max-w-4xl mx-auto space-y-6">
+<!-- Security Header Section -->
+<section class="space-y-1">
+<h2 class="text-headline-sm font-semibold tracking-tight">Access Control</h2>
+<p class="text-sm text-slate-400 font-mono">NODE_ID: mobile-db-core-01</p>
+</section>
+<!-- Credentials Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Server Password -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10">
+<label class="block text-label-sm text-slate-500 uppercase tracking-widest mb-3">Server Master Password</label>
+<div class="relative group">
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-3 font-mono text-primary text-sm focus:border-primary focus:ring-0 transition-all" placeholder="Enter password" type="password" value="********"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="visibility">visibility</span>
+</button>
+</div>
+<p class="mt-2 text-[10px] text-slate-500">Last changed: 14 days ago</p>
+</div>
+<!-- Session Token -->
+<div class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10">
+<label class="block text-label-sm text-slate-500 uppercase tracking-widest mb-3">Runtime Auth Token</label>
+<div class="flex gap-2">
+<div class="flex-grow bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-3 font-mono text-sm text-on-surface truncate">
+            MDB_LIVE_71ffe8_x902_v1
+          </div>
+<button class="bg-primary-container text-on-primary-container px-4 rounded-lg font-bold text-sm hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined align-middle" data-icon="content_copy">content_copy</span>
+</button>
+</div>
+<p class="mt-2 text-[10px] text-secondary">Token expires in 4h 12m</p>
+</div>
+</div>
+<!-- Governance Settings -->
+<section class="bg-surface-container-low rounded-xl overflow-hidden border border-outline-variant/10">
+<div class="px-5 py-4 border-b border-outline-variant/10 flex justify-between items-center bg-surface-container">
+<h3 class="text-sm font-semibold uppercase tracking-wider">Governance &amp; Limits</h3>
+<span class="material-symbols-outlined text-secondary" data-icon="security" style="font-variation-settings: 'FILL' 1;">security</span>
+</div>
+<div class="p-5 space-y-8">
+<!-- Max Clients Slider -->
+<div class="space-y-4">
+<div class="flex justify-between items-end">
+<div>
+<p class="text-sm font-medium">Max Concurrent Clients</p>
+<p class="text-xs text-slate-500">Prevents memory overflow during peak bursts</p>
+</div>
+<span class="text-primary font-mono font-bold text-lg">32<span class="text-xs text-slate-500 font-normal">/50</span></span>
+</div>
+<input class="w-full h-1.5 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary-container" max="50" min="1" type="range" value="32"/>
+</div>
+<!-- Read Only Toggle -->
+<div class="flex items-center justify-between p-4 bg-secondary/5 rounded-lg border border-secondary/20">
+<div class="flex gap-3 items-center">
+<div class="w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_rgba(245,166,35,0.8)]"></div>
+<div>
+<p class="text-sm font-medium text-secondary">Read-Only Mode Enforcement</p>
+<p class="text-xs text-slate-400">Restricts all connected clients to SELECT queries only</p>
+</div>
+</div>
+<button class="w-12 h-6 bg-secondary rounded-full relative transition-colors">
+<div class="absolute right-1 top-1 w-4 h-4 bg-on-secondary rounded-full"></div>
+</button>
+</div>
+<!-- Query Blacklist -->
+<div class="space-y-3">
+<p class="text-sm font-medium">Query Blacklist</p>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-highest rounded border border-outline-variant/20 font-mono text-xs text-error">DROP</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded border border-outline-variant/20 font-mono text-xs text-error">TRUNCATE</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded border border-outline-variant/20 font-mono text-xs text-error">GRANT</span>
+<span class="px-3 py-1 bg-surface-container-highest rounded border border-outline-variant/20 font-mono text-xs text-error">ALTER</span>
+<button class="px-2 py-1 border border-dashed border-outline-variant text-slate-500 rounded hover:border-primary hover:text-primary transition-all">
+<span class="material-symbols-outlined text-xs align-middle" data-icon="add">add</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Active Sessions -->
+<section class="space-y-4">
+<h3 class="text-sm font-semibold uppercase tracking-wider px-1">Live Session Monitor</h3>
+<div class="space-y-2">
+<!-- Session Item 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-outline-variant/5 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="computer">computer</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<p class="text-sm font-bold font-mono">192.168.1.42</p>
+<span class="text-[10px] bg-primary/20 text-primary px-1.5 py-0.5 rounded uppercase font-bold">Admin</span>
+</div>
+<p class="text-xs text-slate-500">Connected: 12m ago • SQL Insight v4.2</p>
+</div>
+</div>
+<button class="text-slate-500 hover:text-error transition-colors p-2">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+</button>
+</div>
+<!-- Session Item 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-outline-variant/5 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-slate-800 flex items-center justify-center">
+<span class="material-symbols-outlined text-slate-400 text-xl" data-icon="smartphone">smartphone</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<p class="text-sm font-bold font-mono">10.0.0.158</p>
+<span class="text-[10px] bg-slate-700 text-slate-400 px-1.5 py-0.5 rounded uppercase font-bold">Worker</span>
+</div>
+<p class="text-xs text-slate-500">Connected: 4h ago • Go-SDK v1.0</p>
+</div>
+</div>
+<button class="text-slate-500 hover:text-error transition-colors p-2">
+<span class="material-symbols-outlined" data-icon="cancel">cancel</span>
+</button>
+</div>
+</div>
+</section>
+<!-- IP Whitelist -->
+<section class="bg-surface-container-low p-5 rounded-xl border border-outline-variant/10">
+<div class="flex justify-between items-center mb-4">
+<label class="text-label-sm text-slate-500 uppercase tracking-widest">Global IP Whitelist</label>
+<span class="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded">Subnet Lock Active</span>
+</div>
+<div class="flex flex-col gap-3">
+<div class="flex gap-2">
+<input class="flex-grow bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-2 font-mono text-sm focus:border-primary focus:ring-0" placeholder="e.g. 172.16.254.1" type="text"/>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold text-sm hover:brightness-110">Whitelist</button>
+</div>
+<div class="flex flex-wrap gap-2 mt-2">
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded-md border border-outline-variant/30">
+<span class="font-mono text-xs">127.0.0.1</span>
+<span class="material-symbols-outlined text-xs text-slate-500 cursor-pointer hover:text-error" data-icon="close">close</span>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-highest px-3 py-1.5 rounded-md border border-outline-variant/30">
+<span class="font-mono text-xs">192.168.0.*</span>
+<span class="material-symbols-outlined text-xs text-slate-500 cursor-pointer hover:text-error" data-icon="close">close</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Settings Active) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe h-16 bg-[#0e0e0e] border-t border-[#3b4a46]/20">
+<!-- Dashboard -->
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Dashboard</span>
+</a>
+<!-- Databases -->
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="database">database</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Databases</span>
+</a>
+<!-- Console -->
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Console</span>
+</a>
+<!-- Logs -->
+<a class="flex flex-col items-center justify-center text-slate-500 py-1 w-full hover:text-[#00E5CC] transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="list_alt">list_alt</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Logs</span>
+</a>
+<!-- Settings (ACTIVE) -->
+<a class="flex flex-col items-center justify-center text-[#00E5CC] bg-[#00E5CC]/10 rounded-lg py-1 w-full" href="#">
+<span class="material-symbols-outlined" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-['Inter'] text-[10px] font-medium tracking-[0.05em] uppercase mt-1">Settings</span>
+</a>
+</nav>
+</body></html>
